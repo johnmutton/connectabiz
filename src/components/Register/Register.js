@@ -141,6 +141,8 @@ render() {
         required
         onChange={this.onBusinessNameChange}
         />
+        <h5>Business Profile picture / logo</h5>
+        <input type='file'/>
         <h5>Business Type:</h5>
     	<select value={this.state.type} onChange={this.onTypeChange} required>
     	<option value='Animal Care'>Animal Care</option>
