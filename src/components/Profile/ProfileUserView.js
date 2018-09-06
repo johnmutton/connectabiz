@@ -3,18 +3,15 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import './ProfileUserView.css';
 
-const ProfileUserView = () => {
+const ProfileUserView = (props) => {
 	return (
 <div>
 	<div className='center'> 
-		<h1>JM Devs</h1>
+		<h1>{props.businessName}</h1>
 	</div>
 	<div id='info'>
 	<h3 className='underline'>Info</h3>
-	<h5>
-	We design, create and develop websites and web applications for all business and organisations.
-	We have a team of professional developers for any business requirements and can create completely
-	unique sites to be different to other businesses to provide a competitive advantage for your business.</h5>
+	<h5>{props.businessDescription}</h5>
 	<img  
 		src='https://cdn.uconnectlabs.com/wp-content/uploads/sites/5/2017/12/20170301155447.jpg' 
 		alt='Business Profile' 
