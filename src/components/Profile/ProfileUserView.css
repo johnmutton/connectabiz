@@ -1,0 +1,22 @@
+#businessProfilePicture {
+	height: 350px;
+	width: auto;
+}
+
+.center {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+}
+
+#info {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.tab {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+}

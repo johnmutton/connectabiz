@@ -1,0 +1,7 @@
+.side {
+	display: flex;
+	flex-flow: row;
+	justify-content: flex-end;
+	background-color: #25d380;
+}
+

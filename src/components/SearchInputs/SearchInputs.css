@@ -1,0 +1,14 @@
+.center {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	padding-right: 50px;
+}
+
+#search-label {
+	padding-top: 5px;
+}
+
+input {
+	width: 100%;
+}

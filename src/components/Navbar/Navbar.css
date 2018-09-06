@@ -1,0 +1,19 @@
+.nav {
+	display: flex;
+	flex-flow: row;
+	justify-content: flex-end;
+	background-color: #25d366;
+}
+
+p {
+	color: white;
+}
+
+img {
+	display: flex;
+	padding-right: 50px;
+}
+
+#logo {
+	align-self: flex-start;
+}
