@@ -16,6 +16,7 @@ const initialState = {
   email: '',
   password: '',
   businessName: '',
+  businessImage: '',
   type: '',
   businessDescription: '',
   area: []
@@ -58,6 +59,7 @@ class App extends Component {
       email: data.email,
       password: data.password,
       businessName: data.businessName,
+      businessImage: data.businessImage,
       type: data.type,
       businessDescription: data.businessDescription,
       area: data.area
@@ -84,6 +86,7 @@ class App extends Component {
       <SearchInputs />
       <ProfileCard  
         businessName={this.state.user.businessName} 
+        businessImage={this.state.user.businessImage}
         businessDescription={this.state.user.businessDescription}
         area={this.state.user.area}
         onRouteChange={this.onRouteChange}

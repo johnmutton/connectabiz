@@ -32,6 +32,8 @@ class Register extends React.Component {
             password: '',
             businessName: '',
             type: '',
+            imageFile: '',
+            businessImage: '',
             businessDescription: '',
             area: [],
             value: '',
@@ -68,6 +70,16 @@ onAddArea = () => {
         this.state.area.push(this.state.value)
     }
 
+getImage = (event) => {
+  let file = event.target.files[0];
+  let reader = new FileReader();
+  
+  reader.onloadend = () => {
+    this.setState({imageFile: file, businessImage: reader.result})
+  }
+  reader.readAsDataURL(file)
+}
+
 onSubmitRegister = () => {
     this.props.getUser({
         name: this.state.name,
@@ -75,6 +87,7 @@ onSubmitRegister = () => {
         password: this.state.password,
         businessName: this.state.businessName,
         type: this.state.type,
+        businessImage: this.state.businessImage,
         businessDescription: this.state.businessDescription,
         area: this.state.area,
     });
@@ -142,7 +155,8 @@ render() {
         onChange={this.onBusinessNameChange}
         />
         <h5>Business Profile picture / logo</h5>
-        <input type='file'/>
+        <input type='file' onChange={this.getImage}/>
+        <img style={{height: 100, width: 100}} src={this.state.businessImage}/>
         <h5>Business Type:</h5>
     	<select value={this.state.type} onChange={this.onTypeChange} required>
     	<option value='Animal Care'>Animal Care</option>

@@ -13,7 +13,7 @@ const ProfileUserView = (props) => {
 	<h3 className='underline'>Info</h3>
 	<h5>{props.businessDescription}</h5>
 	<img  
-		src='https://cdn.uconnectlabs.com/wp-content/uploads/sites/5/2017/12/20170301155447.jpg' 
+		src={props.businessImage}
 		alt='Business Profile' 
 		id='businessProfilePicture'
 	/>

@@ -8,6 +8,7 @@ class ProfileCard extends React.Component {
 		this.state = {
 			displayProfile: false,
 			businessName: this.props.businessName,
+			businessImage: this.props.businessImage,
 			businessDescription: this.props.businessDescription,
 			area: this.props.area
 	}
@@ -28,7 +29,7 @@ class ProfileCard extends React.Component {
 		<h4>{this.state.businessName}</h4>
 		<img 	
 		id='business-profile' 
-		src='https://cdn.uconnectlabs.com/wp-content/uploads/sites/5/2017/12/20170301155447.jpg' 
+		src={this.state.businessImage} 
 		alt='#'
 		/>
 		<p>
@@ -41,6 +42,7 @@ class ProfileCard extends React.Component {
   		</div>
 		: <ProfileUserView
 		businessName={this.state.businessName}
+		businessImage={this.state.businessImage}
 		businessDescription={this.state.businessDescription}
 		area={this.state.area}
         />
