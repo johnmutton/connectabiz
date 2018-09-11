@@ -67,7 +67,7 @@ onBusinessDescriptionChange = (event) => {
 
 
 onAddArea = () => {
-        this.state.area.push(this.state.value)
+        this.state.area.push(<li>{this.state.value}</li>)
     }
 
 getImage = (event) => {
@@ -156,7 +156,7 @@ render() {
         />
         <h5>Business Profile picture / logo</h5>
         <input type='file' onChange={this.getImage}/>
-        <img style={{height: 100, width: 100}} src={this.state.businessImage}/>
+        <img style={{height: 100, width: 100}} src={this.state.businessImage} alt='business'/>
         <h5>Business Type:</h5>
     	<select value={this.state.type} onChange={this.onTypeChange} required>
     	<option value='Animal Care'>Animal Care</option>
@@ -187,7 +187,7 @@ render() {
         inputProps={inputProps}
         />
         <button onClick={this.onAddArea}>Add</button>
-        <ul><li>{this.state.area}</li></ul>
+        <ul>{this.state.area}</ul>
         <div className='div-button'>
         <button 
         className='dim pointer' 

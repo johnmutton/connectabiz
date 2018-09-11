@@ -4,9 +4,7 @@ import SearchInputs from './components/SearchInputs/SearchInputs';
 import Title from './components/Title/Title';
 import Register from './components/Register/Register';
 import Signin from './components/Signin/Signin';
-import ProfileUserView from './components/Profile/ProfileUserView';
 import ProfileCard from './components/ProfileCard/ProfileCard';
-import UserSidebar from './components/UserSidebar/UserSidebar';
 
 
 const initialState = { 
@@ -78,7 +76,7 @@ class App extends Component {
   render() {
     return (
     <div>
-      <Navbar isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange}/>
+      <Navbar isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange} route={this.state.route}/>
      { this.state.route === 'home'
     	? 
     	<div>

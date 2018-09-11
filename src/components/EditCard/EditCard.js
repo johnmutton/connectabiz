@@ -25,10 +25,12 @@ class EditCard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: '',
+			      value: '',
             suggestions: [],
             area: [],
             businessName: '',
+            imageFile: '',
+            businessImage: '',
             businessDescription: '',
 		}
 	}
@@ -60,6 +62,16 @@ onSuggestionsClearRequested = () => {
     this.setState({businessName: event.target.value})
 }
 
+getImage = (event) => {
+  let file = event.target.files[0];
+  let reader = new FileReader();
+  
+  reader.onloadend = () => {
+    this.setState({imageFile: file, businessImage: reader.result})
+  }
+  reader.readAsDataURL(file)
+}
+
 onTypeChange = (event) => {
     this.setState({type: event.target.value})
 }
@@ -88,7 +100,8 @@ onBusinessDescriptionChange = (event) => {
         onChange={this.onBusinessNameChange}
         />
         <h5>Business Profile picture / logo</h5>
-        <input type='file'/>
+        <input type='file' onChange={this.getImage}/>
+        <img src={this.state.businessImage} style={{height: 100, width: 100}} alt='business' />
         <h5>Business Type:</h5>
     	<select value={this.state.type} onChange={this.onTypeChange} required>
     	<option value='Animal Care'>Animal Care</option>
@@ -124,6 +137,7 @@ onBusinessDescriptionChange = (event) => {
         <button 
         className='dim pointer' 
         id='register-button'
+        
         >
         Save
         </button>
@@ -137,7 +151,7 @@ onBusinessDescriptionChange = (event) => {
 		<h4>{this.state.businessName}</h4>
 		<img 	
 		id='business-profile' 
-		src='https://cdn.uconnectlabs.com/wp-content/uploads/sites/5/2017/12/20170301155447.jpg' 
+		src={this.state.businessImage}
 		alt='#'
 		/>
 		<p>{this.state.businessDescription}</p>
