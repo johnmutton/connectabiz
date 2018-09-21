@@ -1,11 +1,41 @@
 import React from 'react';
+import ProfileCard from '../ProfileCard/ProfileCard';
 import './SearchInputs.css';
 
-const SearchInputs = () => {
+class SearchInputs extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedCategory: 'Select category',
+			selectedArea: '',
+			renderProfileCard: false,
+		}
+	}
+
+onCategorySelect = (event) => {
+	this.setState({selectedCategory: event.target.value})
+}
+
+onAreaSelect = (event) => {
+	this.setState({selectedArea: event.target.value})
+}
+
+onSearchSubmit = () => {
+	if (this.state.selectedCategory === this.props.category) {
+	this.setState({renderProfileCard: true});
+} else {
+	this.setState({renderProfileCard: false});
+}
+}
+
+
+
+	render() {
 	return (
+		<div>
 		<div className='center f3 black pa4'>
 		<label className='pa2'>I'm looking for</label>
-		<select>
+		<select onChange={this.onCategorySelect}>
 		<option>Select a service category</option>
     	<option>Animal Care</option>
     	<option>Arts & Entertainment</option>
@@ -20,7 +50,7 @@ const SearchInputs = () => {
     	<option>Other Services</option>
     	</select>
 		<label className='pa2'>in</label>
-		<select>
+		<select onChange={this.onAreaSelect}>
 		<option>Select a location</option>
     	<option>Bedfordshire</option>
 		<option>Berkshire</option>
@@ -71,9 +101,14 @@ const SearchInputs = () => {
 		<option>Wiltshire</option>
 		<option>Worcestershire</option>
 		</select>
-		<button type='submit'>Search</button>
- 		</div>
-	);
+		<button onClick={this.onSearchSubmit}>Search</button>
+		</div>
+		<div>
+		{this.state.renderProfileCard && <ProfileCard hideSearchInputs={this.hideSearchInputs} />}
+		</div>
+		</div>
+		);
+}
 }
 
 export default SearchInputs;

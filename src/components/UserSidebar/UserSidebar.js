@@ -1,4 +1,5 @@
 import React from 'react';
+import EditAccount from '../EditAccount/EditAccount';
 import EditCard from '../EditCard/EditCard';
 import EditSite from '../EditSite/EditSite';
 import DeleteAccount from '../DeleteAccount/DeleteAccount';
@@ -8,22 +9,60 @@ class UserSidebar extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			userRoute: 'home'
+			userRoute: 'editAccount',
+			businessName: '',
+			businessImage: '',
+			businessDescription: '',
+			area: []
 		}
 	}
+
+businessNameChange = (data) => {
+	this.setState({businessName: data})
+}
+
+businessImageChange = (data) => {
+	this.setState({businessImage: data})
+}
+
+businessDescriptionChange = (data) => {
+	this.setState({businessDescription: data})
+}
+
+areaChange = (data) => {
+	this.setState({area: data})
+}
 
 userRouteChange = (route) => {
 	if (route === 'editCard') {
 		this.setState({userRoute: 'editCard'})
-		console.log(route);
 	} 
 	else if (route === 'editSite') {
 		this.setState({userRoute: 'editSite'})
-		console.log(route);
-	} 
-	else if (route === 'delete') {
-		this.setState({userRoute: 'delete'})
-		console.log(route);
+	}
+	else if (route === 'editAccount') {
+		this.setState({userRoute: 'editAccount'})
+	}
+}
+	
+	renderUserSwitch = () => {
+	switch(this.state.userRoute) {
+		case 'editAccount':
+		return (<EditAccount 
+				businessNameChange={this.businessNameChange}
+				areaChange={this.areaChange}
+				/>);
+		case 'editCard':
+		return (<EditCard 
+				businessName={this.state.businessName} 
+				area={this.state.area}
+				businessImage={this.state.businessImage}
+				businessDescription={this.state.businessDescription}
+				businessImageChange={this.businessImageChange}
+				businessDescriptionChange={this.businessDescriptionChange}
+				/>);
+		case 'editSite':
+		return (<EditSite/>);
 	}
 }
 
@@ -31,18 +70,11 @@ userRouteChange = (route) => {
 	return (
 		<div>
 		<div className='side'>
+		<p onClick={() => this.userRouteChange('editAccount')} className='f4 link dim pa3 pointer'>Edit account info</p>
 		<p onClick={() => this.userRouteChange('editCard')} className='f4 link dim pa3 pointer'>Edit Profile Card</p>
 		<p onClick={() => this.userRouteChange('editSite')} className='f4 link dim pa3 pointer'>Edit Profile Site</p>
-		<p onClick={() => this.userRouteChange('delete')} className='f4 link dim pa3 pointer'>Delete Account</p>
 		</div>
-		{ this.state.userRoute === 'delete'
-		?
-		<DeleteAccount  />
-		: ( this.state.userRoute === 'editSite'
-		? <EditSite />
-		: <EditCard />
-		)
-		}
+		{this.renderUserSwitch(this.state.userRoute)}
 		</div>
 	);
 }

@@ -16,7 +16,7 @@ article {
 }
 
 #business-profile {
-    align-self: flex-end;
+    align-self: center;
     height: 100px;
     flex-basis: 150px;
     border: 2px black solid;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
 import './EditSite.css';
 
 
@@ -19,8 +18,24 @@ class EditSite extends React.Component {
             area: [],
             value: '',
             suggestions: [],
+            About: true,
+            "Opening Hours": true,
+            Contact: true,
+            Menu: false,
+            Offers: false,
+            "External Links": true,
+            tabOptions: {
+                About: {desc:'1'},
+                "Opening Hours": {desc: '2'},
+                Contact: {desc:'3'},
+                Menu: {desc:'4'},
+                Offers: {desc:'5'},
+                "External Links": {desc:'6'},
+            }
+            }
+
+            this.handleCheckClicked = this.handleCheckClicked.bind(this);
         }
-    }
 
 onNameChange = (event) => {
     this.setState({name: event.target.value})
@@ -61,6 +76,19 @@ getImage = (event) => {
   reader.readAsDataURL(file)
 }
 
+handleCheckClicked(e) {
+    this.setState({
+      [e.target.name]: e.target.checked
+    })
+  }
+
+/*handleDesc = (event) => {
+    Object.keys(this.state.tabOptions).forEach(name => {
+        let {desc} = this.state.
+    }
+}*/
+
+
 onSubmitRegister = () => {
     this.props.getUser({
         name: this.state.name,
@@ -74,101 +102,87 @@ onSubmitRegister = () => {
     });
 }
 
-render(){
+render() {
+    const links = [];
+    const tabs = [];
+    const tabPanels = [];
+
+    Object.keys(this.state.tabOptions).forEach(name => {
+      links.push(
+          <div>
+          <label key={name}>{name}</label>
+          <input
+            type="checkbox"
+            checked={this.state[name]}
+            name={name}
+            onChange={this.handleCheckClicked}
+          />
+          { this.state[name] === true ? (
+          <input
+          name={name}
+          type='text'
+          onChange={this.handleDesc}
+          />
+          ) : null }
+          </div>
+      );
+
+      if (!this.state[name]) return;
+
+      const { desc } = this.state.tabOptions[name];
+
+      this.handleDesc = (event) => {
+        console.log({name})
+      }
+
+      tabs.push(
+        <Tab>
+          <h3>{name}</h3>
+        </Tab>
+      );
+
+      tabPanels.push(
+        <TabPanel> 
+            {desc}
+        </TabPanel>
+      );
+    });
+
 	return (
-		<div>
-		<div className='div-form'>
-		<div className='background'>
-		<h3>Edit Site here</h3>
-		<h5>Business Name:</h5>
-        <input 
-        type='text' 
-        placeholder='Enter Business Name' 
-        required
-        onChange={this.onBusinessNameChange}
-        />
+		<div className='site-preview'>
+        <div>
+        <div className='background-editsite'>
+        <h3>Edit Site here</h3>
         <h5>Business Profile picture / logo</h5>
         <input type='file' onChange={this.getImage}/>
         <img style={{height: 100, width: 100}} src={this.state.businessImage} alt='business'/>
-        <h5>Business Type:</h5>
-    	<select value={this.state.type} onChange={this.onTypeChange} required>
-    	<option value='Animal Care'>Animal Care</option>
-    	<option value='Arts & Entertainment'>Arts & Entertainment</option>
-    	<option value='Baby and Kids'>Baby and Kids</option>
-    	<option value='Construction'>Construction</option>
-    	<option value='Computers & Electronics'>Computers & Electronics</option>
-    	<option value='Fashion'>Fashion</option>
-    	<option value='Finance & Legal Services'>Finance & Legal Services</option>
-    	<option value='Food'>Food</option>
-    	<option value='Hair & Beauty'>Hair & Beauty</option>
-    	<option value='Sports & Fitness'>Sports & Fitness</option>
-    	<option value='Other Services'>Other Services</option>
-    	</select>
-        <h5>Business Description: (Max characters: 100)</h5>
-        <textarea 
-        rows='4' 
-        maxLength='100' 
-        placeholder='Enter Business Description'
-        onChange={this.onBusinessDescriptionChange}/>
         <h5>Profile Tabs (Add as many as you would like)</h5>
-		
-        </div>
-        </div>
-
-        <h2>Preview your business site here...</h2>
-        
-        <div>
-	<div className='center'> 
-		<h1>{this.state.businessName}</h1>
-	</div>
-	<div id='info'>
-	<h3 className='underline'>Info</h3>
-	<h5>{this.state.businessDescription}</h5>
-	<img  
-		src={this.state.businessImage}
-		alt='Business Profile' 
-		id='businessProfilePicture'
-	/>
-	</div>
-	<Tabs>
-	<div>
-		<TabList className='tab'>
-			<Tab><input type='text' /></Tab>
-			<Tab><input type='text' /></Tab>
-			<Tab><input type='text' /></Tab>
-			<Tab><input type='text' /></Tab>
-			<Tab><input type='text' /></Tab>
-			<Tab><input type='text' /></Tab>
-		</TabList>
-
-		<TabPanel className='center'>
-			<h2><input type='text' /></h2>
-		</TabPanel>
-
-		<TabPanel className='center'>
-			<h2><input type='text'/></h2>
-		</TabPanel>
-
-		<TabPanel className='center'>
-			<h2><input type='text' /></h2>
-		</TabPanel>
-
-		<TabPanel className='center' id='gallery'>
-			<input type='file' />
-		</TabPanel>
-
-		<TabPanel className='center'>
-			<h2><input type='text' /></h2>
-		</TabPanel>
-
-		<TabPanel className='center'>
-			<h2><input type='text' /></h2>
-		</TabPanel>
+        {links}
 		</div>
-	</Tabs>
+        </div>
 
-</div>
-</div>
+        <div>
+        <h2 className='containcolumn'>Preview your business site here...</h2>
+        <div className='site'>
+        <div className='center'> 
+        <h1>{this.state.businessName}</h1>
+        </div>
+        <div id='info'>
+        <img  
+        src={this.state.businessImage}
+        alt='Business Profile' 
+        id='businessProfilePicture'
+        />
+        </div>
+        <Tabs>
+        <div>
+        <TabList>{tabs}</TabList>
+        {tabPanels}
+        </div>
+        </Tabs>
+        </div>
+        </div>
+        </div>
 	)
 }
 }

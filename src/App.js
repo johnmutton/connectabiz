@@ -4,7 +4,6 @@ import SearchInputs from './components/SearchInputs/SearchInputs';
 import Title from './components/Title/Title';
 import Register from './components/Register/Register';
 import Signin from './components/Signin/Signin';
-import ProfileCard from './components/ProfileCard/ProfileCard';
 
 
 const initialState = { 
@@ -15,7 +14,7 @@ const initialState = {
   password: '',
   businessName: '',
   businessImage: '',
-  type: '',
+  category: '',
   businessDescription: '',
   area: []
   }
@@ -47,7 +46,7 @@ class App extends Component {
 
   isSignedIn = (bool) => {
     if (bool === true) {
-      this.setState({isSignedIn: true, route: initialState})
+      this.setState({isSignedIn: true, route: 'signedin'})
     }
   }
 
@@ -57,45 +56,38 @@ class App extends Component {
       email: data.email,
       password: data.password,
       businessName: data.businessName,
-      businessImage: data.businessImage,
-      type: data.type,
-      businessDescription: data.businessDescription,
-      area: data.area
     }
     })
       console.log({name: data.name,
       email: data.email,
       password: data.password,
       businessName: data.businessName,
-      type: data.type,
-      businessDescription: data.businessDescription,
-      area: data.area
   });
+}
+
+  renderSwitch = () => {
+  switch(this.state.route) {
+    case 'home':
+     return (
+      <div>
+        <Title />
+        <SearchInputs category={this.state.user.category} onRouteChange={this.onRouteChange} />
+      </div>);
+    case 'register':
+      return (<Register getUser={this.getUser} onRouteChange={this.onRouteChange}/>);
+    case 'signin':
+      return (<Signin isSignedIn={this.isSignedIn} onRouteChange={this.onRouteChange}/>);
+    default:
+      console.log('do nothing');
+  }
 }
 
   render() {
     return (
-    <div>
+      <div>
       <Navbar isSignedIn={this.state.isSignedIn} onRouteChange={this.onRouteChange} route={this.state.route}/>
-     { this.state.route === 'home'
-    	? 
-    	<div>
-    	<Title />
-      <SearchInputs />
-      <ProfileCard  
-        businessName={this.state.user.businessName} 
-        businessImage={this.state.user.businessImage}
-        businessDescription={this.state.user.businessDescription}
-        area={this.state.user.area}
-        onRouteChange={this.onRouteChange}
-      />
+      {this.renderSwitch(this.state.route)}
       </div>
-      	: (this.state.route === 'register'
-      	? <Register getUser={this.getUser}/>
-      	: <Signin isSignedIn={this.isSignedIn} onRouteChange={this.onRouteChange}/>
-      	)
-    	}
-    </div>
 	 );
    }
  }

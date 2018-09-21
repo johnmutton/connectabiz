@@ -1,22 +1,33 @@
-#profile-div {
-    padding-top: 20px;
-    padding-bottom: 30px;
+.cardpreview {
+    display: flex;
 }
 
-article {
-    margin-left: auto;
-    margin-right: auto;
+.containcolumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.editcard {
     border: 2px black solid;
     border-radius: 25px;
     background-color: #25d366;
     display: flex;
     align-items: center;
-    width: 50%;
+    padding-right: 20px;
+}
 
+#business-description {
+    word-break: break-word;
+}
+
+textarea {
+    resize: none;
+    word-break: break-word;
 }
 
 #business-profile {
-    align-self: flex-end;
+    align-self: center;
     height: 100px;
     flex-basis: 150px;
     border: 2px black solid;
@@ -33,12 +44,6 @@ h4 {
     padding: 10px;
 }
 
-.div-form {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 15px;
-}
-
 #register-button {
     margin-top: 25px;
     border: 1px black solid;
@@ -47,7 +52,11 @@ h4 {
     padding: 10px;
 }
 
-.background {
+.background-editcard {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 75%;
+    margin-left: 30px;
     background-color: #25d366;
     border: 2px black solid;
     border-radius: 25px;

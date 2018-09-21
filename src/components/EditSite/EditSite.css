@@ -1,8 +1,20 @@
-.tab {
+#tab-options {
+	display: inline;
+}
+
+.site {
+	border: 1px solid black;
+	margin-left: 40px;
+}
+
+.site-preview {
 	display: flex;
-	flex-flow: row;
-	justify-content: center;
-	border-bottom: solid black 1px;
+}
+
+.containcolumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .div-form {
@@ -19,11 +31,12 @@
 	padding: 10px;
 }
 
-.background {
+.background-editsite {
 	background-color: #25d366;
 	border: 2px black solid;
     border-radius: 25px;
     padding: 20px;
+    margin-left: 30px;
 }
 
 .div-button {
