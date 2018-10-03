@@ -62,10 +62,6 @@ onBusinessDescriptionChange = (event) => {
 }
 
 
-onAddArea = () => {
-        this.state.area.push(this.state.value)
-    }
-
 getImage = (event) => {
   let file = event.target.files[0];
   let reader = new FileReader();
@@ -82,12 +78,13 @@ handleCheckClicked(e) {
     })
   }
 
-/*handleDesc = (event) => {
-    Object.keys(this.state.tabOptions).forEach(name => {
-        let {desc} = this.state.
-    }
-}*/
-
+handleDesc = (event) => {
+    let tabOptions = {...this.state.tabOptions[event.target.name]};
+    let tabOptionsDesc = tabOptions.desc;
+    
+    this.setState({[event.target.name.desc]: event.target.value});
+    console.log([event.target.name.desc]); 
+}
 
 onSubmitRegister = () => {
     this.props.getUser({
@@ -131,9 +128,12 @@ render() {
 
       const { desc } = this.state.tabOptions[name];
 
-      this.handleDesc = (event) => {
-        console.log({name})
-      }
+
+
+      /*this.handleDesc = (event) => {
+        if ({name} === 'About')
+        this.setState(tabOptions[About]: event.target.value)
+      }*/
 
       tabs.push(
         <Tab>
