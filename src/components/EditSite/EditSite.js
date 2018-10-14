@@ -25,7 +25,7 @@ class EditSite extends React.Component {
             Offers: false,
             "External Links": true,
             tabOptions: {
-                About: {desc:'1'},
+                About: {desc:'edit'},
                 "Opening Hours": {desc: '2'},
                 Contact: {desc:'3'},
                 Menu: {desc:'4'},
@@ -62,10 +62,6 @@ onBusinessDescriptionChange = (event) => {
 }
 
 
-onAddArea = () => {
-        this.state.area.push(this.state.value)
-    }
-
 getImage = (event) => {
   let file = event.target.files[0];
   let reader = new FileReader();
@@ -82,12 +78,17 @@ handleCheckClicked(e) {
     })
   }
 
-/*handleDesc = (event) => {
-    Object.keys(this.state.tabOptions).forEach(name => {
-        let {desc} = this.state.
-    }
-}*/
-
+handleDesc = (event) => {
+    /*let tabOptions = {...this.state.tabOptions[event.target.name]};
+    tabOptions.desc = event.target.value;
+    console.log(this.state.tabOptions.About.desc)
+    console.log(tabOptions.desc)*/
+    let tabOptions = {...this.state.tabOptions[event.target.name]};
+    tabOptions = event.target.value;
+    console.log(tabOptions);
+    this.setState({tabOptions});
+    //this.setState({tabOptions: tabOptions});
+}
 
 onSubmitRegister = () => {
     this.props.getUser({
@@ -115,13 +116,14 @@ render() {
             type="checkbox"
             checked={this.state[name]}
             name={name}
-            onChange={this.handleCheckClicked}
+            onChange={ (event) => this.handleCheckClicked(event)}
           />
           { this.state[name] === true ? (
           <input
           name={name}
           type='text'
-          onChange={this.handleDesc}
+          checked={true}
+          onChange={(event) => this.handleDesc(event)}
           />
           ) : null }
           </div>
@@ -131,9 +133,12 @@ render() {
 
       const { desc } = this.state.tabOptions[name];
 
-      this.handleDesc = (event) => {
-        console.log({name})
-      }
+
+
+      /*this.handleDesc = (event) => {
+        if ({name} === 'About')
+        this.setState(tabOptions[About]: event.target.value)
+      }*/
 
       tabs.push(
         <Tab>

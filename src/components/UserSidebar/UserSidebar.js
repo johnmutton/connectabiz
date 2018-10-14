@@ -2,7 +2,6 @@ import React from 'react';
 import EditAccount from '../EditAccount/EditAccount';
 import EditCard from '../EditCard/EditCard';
 import EditSite from '../EditSite/EditSite';
-import DeleteAccount from '../DeleteAccount/DeleteAccount';
 import './UserSidebar.css';
 
 class UserSidebar extends React.Component {
@@ -62,9 +61,11 @@ userRouteChange = (route) => {
 				businessDescriptionChange={this.businessDescriptionChange}
 				/>);
 		case 'editSite':
-		return (<EditSite/>);
-	}
-}
+		return (<EditSite
+				businessName={this.state.businessName}
+				/>);
+			}
+		}
 
 	render() {
 	return (

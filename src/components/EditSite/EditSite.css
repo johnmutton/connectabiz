@@ -5,6 +5,7 @@
 .site {
 	border: 1px solid black;
 	margin-left: 40px;
+	margin-bottom: 40px;
 }
 
 .site-preview {
@@ -37,8 +38,43 @@
     border-radius: 25px;
     padding: 20px;
     margin-left: 30px;
+    margin-top: 50px;
 }
 
 .div-button {
 	text-align: center;
+}
+
+.fa {
+  padding: 20px;
+  font-size: 20px;
+  width: 60px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 10px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-instagram {
+  background: #125688;
+  color: white;
+}
+
+.fa-pinterest {
+  background: #cb2027;
+  color: white;
 }

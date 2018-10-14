@@ -1,17 +1,5 @@
 import React from 'react';
 import './EditCard.css';
-import Autosuggest from 'react-autosuggest';
-import {areas} from '../Areas/Areas';
-
-
-const getSuggestions = value => {
-  const inputValue = value.trim().toLowerCase();
-  const inputLength = inputValue.length;
- 
-  return inputLength === 0 ? [] : areas.filter(area =>
-    area.name.toLowerCase().slice(0, inputLength) === inputValue
-  );
-};
 
 class EditCard extends React.Component {
 	constructor(props) {
@@ -22,27 +10,6 @@ class EditCard extends React.Component {
             businessDescription: this.props.businessDescription,
 		}
 	}
-
-
-
-onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue,
-
-    });
-  };
-
-onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: getSuggestions(value)
-    });
-  };
-
-onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
-  };
 
 getImage = (event) => {
   let file = event.target.files[0];
@@ -64,12 +31,6 @@ handleSubmit = () => {
 }
 
 	render() {
-    const { value, suggestions } = this.state;
-    const inputProps = {
-      placeholder: 'Select Business Area(s)',
-      value,
-      onChange: this.onChange
-    };
 	return (
 		<div className='cardpreview'>
 		<div>
